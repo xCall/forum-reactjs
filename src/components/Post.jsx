@@ -8,11 +8,10 @@ import { Comment } from "./Comment";
 import styles from "./Post.module.css";
 
 export function Post({ author, publishedAt, content }) {
-  const [comments, setComments] = useState([
-    "Post muito BatteryChargingVertical, hein?!",
-  ]);
+  const [comments, setComments] = useState(["Post muito BatteryChargingVertical, hein?!"]);
 
   const [newCommentText, setNewCommentText] = useState("");
+
   const publishedDateFormatted = format(
     publishedAt,
     "d 'de' LLLL 'às' HH:mm'h'",
@@ -27,6 +26,7 @@ export function Post({ author, publishedAt, content }) {
   });
 
   function handleCreateNewComment() {
+    event.preventDefault();
     setComments([...comments, newCommentText]);
     setNewCommentText('');
   }
@@ -72,11 +72,11 @@ export function Post({ author, publishedAt, content }) {
           <a href="">#rocketseat</a>{" "}
         </p>
       </div>
-      <form onSubmit={handleCreateNewComment()} className={styles.commentForm}>
+      <form onSubmit={handleCreateNewComment} className={styles.commentForm}>
         <strong>Deixe seu feedback</strong>
 
         <textarea
-          onChange={handleNewCommentChange()}
+          onChange={handleNewCommentChange}
           value={newCommentText}
           name="comment"
           placeholder="Deixe um comentário"
@@ -94,3 +94,4 @@ export function Post({ author, publishedAt, content }) {
     </article>
   );
 }
+
